@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .custom-file-input {
+            display: none;
+        }
+
+        .custom-file-label {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            display: inline-block;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .custom-file-label:hover {
+            background-color: #0056b3;
+        }
+    </style>
+
+</head>
+
+<body>
+    <input type="file" id="file_taker" class="custom-file-input" accept="video/*">
+    <label for="file_taker" class="custom-file-label">Choose Video</label>
+
+    <video id="video_player" controls style="max-width: 100%;"></video>
+
+    <a id="video_link" href="#" target="_blank" style="display: none;">Download Video</a>
+
+    <script>
+        let fliePath = document.getElementById('file_taker');
+        fliePath.addEventListener('change', function () {
+            const fileInput = this;
+            const selectedFile = fileInput.files[0]; // Get the selected file
+            if (selectedFile) {
+                const filePath = URL.createObjectURL(selectedFile); // Get the path of the selected file
+                console.log('Selected video path:', filePath);
+                const videoPlayer = document.getElementById('video_player');
+                videoPlayer.src = filePath; // Set the source of the video player
+
+                // Show the link to the uploaded video
+                const videoLink = document.getElementById('video_link');
+                videoLink.href = filePath;
+                videoLink.style.display = 'block';
+            }
+        });
+
+    </script>
+</body>
+
+</html>
